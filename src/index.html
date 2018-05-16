@@ -1,14 +1,23 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- https://github.com/aws/aws-amplify/issues/678 fix: -->
+  <script>
+    if (global === undefined) {
+      var global = window;
+    }
+  </script>
+  <!-- https://github.com/aws/aws-amplify/issues/678 fix end-->
   <meta charset="utf-8">
   <title>MyContacts</title>
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root></app-root>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  </head>
+
+<body class="container-fluid">
+  <mc-root></mc-root>
 </body>
 </html>

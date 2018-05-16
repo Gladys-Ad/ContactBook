@@ -1,0 +1,83 @@
+<div *ngIf="userContacts.length == 0">
+  <!--Some code to show spinning loading sign saying loading data from server-->
+  {{loadingMessage}}
+</div>
+<div *ngIf="userContacts.length > 0">
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Relation</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Address</th>
+    </tr>
+    </thead>
+    <tbody *ngFor="let contact of userContacts">
+    <tr>
+      <td>{{contact.name}}</td>
+      <td>{{contact.relation}}</td>
+      <td>{{contact.phone}}</td>
+      <td>{{contact.email}}</td>
+      <td>{{contact.address}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+<div>
+  <form [formGroup]="contactForm" (ngSubmit)="addContact()">
+    <table class="table">
+      <tbody>
+      <td>
+        <div class="form-group" [class.has-error]="contactForm.get('name').invalid && contactForm.get('name').touched">
+          <input type="text" placeholder="Contact Name" class="form-control" formControlName="name">
+          <span *ngIf="contactForm.get('name').touched&&contactForm.get('name').errors" style="color:red">
+              <span *ngIf="contactForm.get('name').errors.required">Please enter a name for the contact</span>
+            </span>
+        </div>
+      </td>
+      <td>
+        <div class="form-group" [class.has-error]="contactForm.get('relation').invalid && contactForm.get('relation').touched">
+          <select class="form-control" formControlName="relation">
+            <option value="">Select a relation...</option>
+            <option *ngFor="let rel of relations" value="{{rel}}">{{rel}}</option>
+          </select>
+          <span *ngIf="contactForm.get('relation').touched&&contactForm.get('relation').errors" style="color:red">
+              <span *ngIf="contactForm.get('relation').errors.required">Please choose the type of relation to the contact</span>
+            </span>
+        </div>
+      </td>
+      <td>
+        <div class="form-group" [class.has-error]="contactForm.get('phone').invalid && contactForm.get('phone').touched">
+          <input type="tel" placeholder="Contact Phone" class="form-control" formControlName="phone">
+          <span *ngIf="contactForm.get('phone').touched&&contactForm.get('phone').errors" style="color:red">
+              <span *ngIf="contactForm.get('phone').errors.required">Please enter the phone number of the contact</span>
+              <span *ngIf="contactForm.get('phone').errors.pattern">Please enter a valid phone number 123-123-1234</span>
+            </span>
+        </div>
+      </td>
+      <td>
+        <div class="form-group" [class.has-error]="contactForm.get('email').invalid && contactForm.get('email').touched">
+          <input type="email" placeholder="Contact Email" class="form-control" formControlName="email">
+          <span *ngIf="contactForm.get('email').touched&&contactForm.get('email').errors" style="color:red">
+              <span *ngIf="contactForm.get('email').errors.required">Please enter an email address for the contact</span>
+              <span *ngIf="contactForm.get('email').errors.pattern">Please enter a valid email address for the contact</span>
+            </span>
+        </div>
+      </td>
+      <td>
+        <div class="form-group" [class.has-error]="contactForm.get('address').invalid && contactForm.get('address').touched">
+          <input type="text" placeholder="Contact Address" class="form-control" formControlName="address">
+          <span *ngIf="contactForm.get('address').touched&&contactForm.get('address').errors" style="color:red">
+              <span *ngIf="contactForm.get('address').errors.required">Please enter the address of the contact</span>
+            </span>
+        </div>
+      </td>
+      <td><div class="form-group">
+        <button class="btn btn-primary" type="submit" [disabled]="!contactForm.valid">{{addContactButton}}</button>
+      </div></td>
+      </tbody>
+    </table>
+  </form>
+</div>

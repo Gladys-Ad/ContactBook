@@ -1,0 +1,65 @@
+<div class="container-fluid">
+    <div class="wrapper">
+        <form class="form-login" (ngSubmit)="signupUser()" [formGroup]="signupForm">
+        <h3 class="form-login-heading">Welcome! Please Sign Up</h3>
+        <hr class="colorgraph"><br>
+
+        <div class="form-group" [class.has-error]="signupForm.get('name').invalid && signupForm.get('name').touched">
+            <label>Name</label>
+            <input type="text" class="form-control" placeholder="Name" formControlName="name"/>
+            <span *ngIf="(signupForm.get('name').touched||signupForm.get('name').dirty)&&signupForm.get('name').errors" style="color:red">
+                <span >Please enter your name</span>
+            </span>
+        </div>
+        <div formGroupName = "emailGroup">
+            <div [class.has-error]="signupForm.get('emailGroup.email').invalid && signupForm.get('emailGroup.email').touched" class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control" placeholder="Email" formControlName="email"/>
+                <span
+                *ngIf="(signupForm.get('emailGroup.email').touched||signupForm.get('emailGroup.email').dirty)
+                &&signupForm.get('emailGroup.email').errors"
+                style="color:red">
+                    <span *ngIf="signupForm.get('emailGroup.email').errors.required">Please enter an email address</span>
+                    <span *ngIf="signupForm.get('emailGroup.email').errors.pattern">Please enter a valid email address</span>
+                </span>
+            </div>
+            <div [class.has-error]="signupForm.get('emailGroup.confirmEmail').invalid && signupForm.get('emailGroup.confirmEmail').touched" class="form-group">
+                <label>Confirm Email</label>
+                <input type="email" class="form-control" placeholder="Confirm Email" formControlName="confirmEmail"/>
+                <span
+                *ngIf="(signupForm.get('emailGroup.confirmEmail').touched||signupForm.get('emailGroup.confirmEmail').dirty)
+                &&(signupForm.get('emailGroup.confirmEmail').errors|| signupForm.get('emailGroup').errors)"
+                style="color:red">
+                    <span *ngIf="signupForm.get('emailGroup').errors?.match">Confirmed email address must match email address</span>
+                </span>
+            </div>
+        </div>
+        <div formGroupName="passwordGroup">
+            <div [class.has-error]="signupForm.get('passwordGroup.password').invalid && signupForm.get('passwordGroup.password').touched" class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" placeholder="Password" formControlName="password"/>
+                <span
+                *ngIf="(signupForm.get('passwordGroup.password').touched||signupForm.get('passwordGroup.password').dirty)
+                &&signupForm.get('passwordGroup.password').errors"
+                style="color:red">
+                    <span *ngIf="signupForm.get('passwordGroup.password').errors.required">Please enter a password</span>
+                    <span *ngIf="signupForm.get('passwordGroup.password').errors.pattern">Please enter a valid password. At least 8 characters long,1 number, 1 uppercase, 1 lowercase, a special character</span>
+                </span>
+            </div>
+            <div [class.has-error]="signupForm.get('passwordGroup.confirmPassword').invalid && signupForm.get('passwordGroup.confirmPassword').touched" class="form-group">
+                <label>Confirm Password</label>
+                <input type="password" class="form-control" placeholder="Confirm Password" formControlName="confirmPassword"/>
+                <span
+                *ngIf="(signupForm.get('passwordGroup.password').touched||signupForm.get('passwordGroup.password').dirty)
+                &&(signupForm.get('passwordGroup.password').errors|| signupForm.get('passwordGroup').errors)"
+                style="color:red">
+                    <span *ngIf="signupForm.get('passwordGroup').errors?.match">Confirmed password must match password</span>
+                </span>
+            </div>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!signupForm.valid">{{signupButton}}</button>
+    </form>
+    </div>
+
+

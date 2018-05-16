@@ -1,0 +1,26 @@
+//lifecycle hooks
+
+OnInit: perform component initialization, retrieve data
+
+
+OnChanges: perform action after change to input properties
+
+onDestroy: perform cleanup
+
+//implement the interface
+
+
+<a [routerLink] = "['/contacts']">
+
+
+//passing parameter to route
+
+<a [routerLink]="['path',parameter]">
+
+
+import {ActivatedRoute} from
+
+constructor(_r:ActivatedRoute){
+  console.log(this._r.snapshot.paramMap.get('id'));
+}
+'+' convert a string to numeric

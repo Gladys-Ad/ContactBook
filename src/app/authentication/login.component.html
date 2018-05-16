@@ -1,0 +1,25 @@
+<div class="container-fluid">
+  <div class="wrapper">
+    <form class="form-login" (ngSubmit)="loginUser()" [formGroup]="loginForm">
+      <h3 class="form-login-heading">Welcome! Please Sign In</h3>
+      <hr class="colorgraph"><br>
+
+      <div [class.has-error]="loginForm.get('email').invalid && loginForm.get('email').touched" class="form-group">
+        <input type="email" class="form-control" placeholder="Email" formControlName="email"/>
+        <span *ngIf="(loginForm.get('email').touched||loginForm.get('email').dirty)&&loginForm.get('email').errors" style="color:red">
+            <span *ngIf="loginForm.get('email').errors.required">Please enter an email address</span>
+            <span *ngIf="loginForm.get('email').errors.pattern">Please enter a valid email address</span>
+          </span>
+      </div>
+      <div [class.has-error]="loginForm.get('password').invalid && loginForm.get('password').touched" class="form-group">
+        <input type="password" class="form-control" placeholder="Password" formControlName="password"/>
+        <span *ngIf="(loginForm.get('password').touched||loginForm.get('password').dirty)&&loginForm.get('password').errors" style="color:red">
+          <span *ngIf="loginForm.get('password').errors.required">Please enter a password</span>
+        </span>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!loginForm.valid">{{loginButton}}</button>
+    </form>
+  </div>
+</div>
+
+
